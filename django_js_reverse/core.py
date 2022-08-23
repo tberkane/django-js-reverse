@@ -12,7 +12,7 @@ from django.template import loader
 from django.utils.safestring import mark_safe
 
 if sys.version_info < (3, ):
-    from django.utils.encoding import force_text
+    from django.utils.encoding import force_str
 else:
     from django.utils.encoding import force_str as force_text
 
@@ -116,9 +116,9 @@ def generate_json(default_urlresolver, script_prefix=None):
     return collections.OrderedDict([
         ('urls', [
             [
-                force_text(name),
+                force_str(name),
                 [
-                    [force_text(path), [force_text(arg) for arg in args]]
+                    [force_str(path), [force_str(arg) for arg in args]]
                     for path, args in patterns
                 ],
             ] for name, patterns in urls
